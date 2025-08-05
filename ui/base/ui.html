@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>chatfed</title>
+<style type="text/css">
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+.chat-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.sidebar {
+    width: 300px;
+    background-color: #2b2b2b;
+    border-right: 1px solid #3c3c3c;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .header {
+    padding: 20px;
+    border-bottom: 1px solid #3c3c3c;
+}
+
+.sidebar .header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.chat-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #3c3c3c;
+    transition: background-color 0.2s;
+}
+
+.chat-item:hover, .chat-item.active {
+    background-color: #3c3c3c;
+}
+
+.chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #555;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.chat-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-name {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.last-message {
+    font-size: 14px;
+    color: #aaa;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main-chat {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #3c3c3c;
+    background-color: #2b2b2b;
+}
+
+.chat-header .chat-avatar {
+    width: 45px;
+    height: 45px;
+}
+
+.chat-header .chat-info {
+    margin-left: 15px;
+}
+
+.chat-status {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.message-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    position: relative;
+    font-size: 15px;
+}
+
+.message-text {
+    word-wrap: break-word;
+}
+
+.message-time {
+    display: block;
+    font-size: 10px;
+    color: #888;
+    margin-top: 5px;
+    text-align: right;
+}
+	.sent .message-time {
+		color: #ddd;
+	}
+
+
+.message.received {
+    background-color: #3b3b3b;
+    align-self: flex-start;
+}
+
+.message.sent {
+    background-color: #4b8af0;
+    color: white;
+    align-self: flex-end;
+}
+
+.message-input {
+    display: flex;
+    padding: 15px 20px;
+    background-color: #2b2b2b;
+    border-top: 1px solid #3c3c3c;
+}
+
+.message-input input {
+    flex-grow: 1;
+    border: none;
+    background-color: #3b3b3b;
+    color: #f0f0f0;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+}
+
+.message-input button {
+    margin-left: 10px;
+    border: none;
+    background-color: #4b8af0;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.message-input button:hover {
+    background-color: #3a75d5;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px; /* Collapse sidebar on smaller screens */
+    }
+    .chat-item .chat-info, .sidebar .header h2 {
+        display: none;
+    }
+    .chat-item {
+        justify-content: center;
+    }
+    .main-chat {
+        width: calc(100% - 80px); /* Adjust main chat width */
+    }
+}
+</style>
+</head>
+<body>
+	<div class="chat-container">
+		<div class="sidebar">
+			<div class="header">
+				<h2>Chats</h2>
+			</div>
+			<ul class="chat-list">
+				<li class="chat-item active">
+					<div class="chat-avatar"></div>
+					<div class="chat-info">
+						<span class="chat-name">FediCon 2025</span>
+						<span class="last-message">You: Sounds good!</span>
+					</div>
+				</li>
+				<li class="chat-item">
+					<div class="chat-avatar"></div>
+					<div class="chat-info">
+						<span class="chat-name">FediCon Friday Speakers</span>
+						<span class="last-message">Sean: Thank you :-)</span>
+					</div>
+				</li>
+				<li class="chat-item">
+					<div class="chat-avatar"></div>
+					<div class="chat-info">
+						<span class="chat-name">FediCon Saturday Speakers</span>
+						<span class="last-message">Chris: I am the atomicpoet!</span>
+					</div>
+				</li>
+			</ul>
+		</div> <!-- sidebar -->
+		<div class="main-chat">
+			<div class="chat-header">
+				<div class="chat-avatar"></div>
+				<div class="chat-info">
+					<span class="chat-name">FediCon 2025</span>
+					<span class="chat-status">69 members, 38 online</span>
+				</div>
+			</div>
+			<div class="message-area">
+				<div class="message received">
+					<span class="message-text">Where are the FediCon videos?</span>
+					<span class="message-time">10:01 AM</span>
+				</div>
+				<div class="message sent">
+					<span class="message-text">I started uploading the FediCon 2025 videos here:<br /><br />https://spectra.video/@fedicon</span>
+					<span class="message-time">10:02 AM</span>
+				</div>
+			</div>
+			<div class="message-input">
+				<input type="text" placeholder="Type a message...">
+				<button>Send</button>
+			</div>
+		</div> <!-- main-chat -->
+	</div> <!-- chat-container -->
+</body>
+</html>
